@@ -1,4 +1,22 @@
+# Noteherder
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+
+## Day 6 Homework
+
+* Load data in the form when a note is clicked in the list.
+
+### Bonus Credit
+
+* Add a note to the list when the form is submitted.
+
+### Super Mega Bonus Credit
+
+* Make the _delete_ button work.
+
+### Super Mega Bonus Credit Hyper Fighting
+
+* Make the "+" button in the sidebar clear out the form so a new note can be added.
 
 Below you will find some information on how to perform common tasks.<br>
 You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
