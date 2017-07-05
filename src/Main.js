@@ -1,9 +1,15 @@
 import React from 'react'
 
+import Sidebar from './Sidebar'
+import NoteList from './NoteList'
+import NoteForm from './NoteForm'
+
 const Main = () => {
     return (
         <div className="Main">
-            Hello, main
+            <Sidebar />
+            <NoteList />
+            <NoteForm />
         </div>
     )
 }
