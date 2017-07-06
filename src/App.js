@@ -55,9 +55,10 @@ class App extends Component {
 
   deleteCurrentNote = () => {
     const notes = {...this.state.notes}
-    delete notes[this.state.currentNote.id] // = null
+    notes[this.state.currentNote.id] = null
     this.setState({ notes })
     this.resetCurrentNote()
+    console.log("deleted")
   }
 
   render() {
