@@ -7,7 +7,7 @@ class App extends Component {
   
   constructor(){
     super()
-    
+
   const please = (props) => {
 
   }
@@ -25,26 +25,40 @@ class App extends Component {
             body:'Also very fancy',
         },
       },
-      currentNote:{
-        id:null,
-        title:'',
-        body:'',
-      },
+      currentNote:this.blankNote(),
     }
   }
 
   setCurrentNote = (note) =>{
     this.setState({ currentNote: note })
-  
+  }
+
+  blankNote = () => {
+    return {
+      id: null,
+      title:'',
+      body:'',
+    }
+  }
+
+  resetCurrentNote = () => {
+    this.setCurrentNote(this.blankNote())
   }
 
   render() {
+    const actions = {
+      setCurrentNote: this.setCurrentNote,
+      resetCurrentNote: this.resetCurrentNote
+    }
+    const noteData = {
+      notes: this.state.notes,
+      currentNote: this.state.currentNote
+    }
     return (
       <div className="App">
       <Main 
-        notes={this.state.notes}
-        currentNote={this.state.currentNote}
-        setCurrentNote={this.setCurrentNote}
+        {...actions}
+        {...noteData}
         />
       </div>
     );

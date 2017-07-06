@@ -5,10 +5,10 @@ import quill from './quill.svg'
 import newHover from './new-hover.png'
 import newIcon from './new.png'
 
-const Sidebar = () =>{
+const Sidebar = ({resetCurrentNote}) =>{
     
-    const handleNew = (ev) => {
-        ev.preventDevault()
+    const handleNew = () => {
+        resetCurrentNote()
         console.log("new clicked")
   }
 
@@ -17,7 +17,7 @@ const Sidebar = () =>{
           <div className="logo">
               <img src={quill} alt="Noteherder"/>
           </div>
-          <a className="new-note" href="/notes"  onClick={handleNew}>
+          <a className="new-note" onClick={resetCurrentNote}>
             <img src={newHover} alt="New note"/>
             <img className="outline" src={newIcon} alt="New note"/>
           </a>
