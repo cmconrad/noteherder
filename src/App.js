@@ -58,7 +58,6 @@ class App extends Component {
     notes[this.state.currentNote.id] = null
     this.setState({ notes })
     this.resetCurrentNote()
-    console.log("deleted")
   }
 
   render() {
