@@ -8,16 +8,24 @@ class App extends Component {
   
   constructor(){
     super()
-
-  const please = (props) => {
-
+  }
+ 
   }
 
     this.state = {
       notes:{},
       currentNote:this.blankNote(),
     }
-  }
+    
+    componentDidMount = () => {
+      base.syncState(
+        'notes',
+        {
+          conext: this,
+          state: 'notes',
+        }
+      )
+    }
 
   setCurrentNote = (note) => {
     this.setState({ currentNote: note })
@@ -50,7 +58,7 @@ class App extends Component {
 
   deleteCurrentNote = () => {
     const notes = {...this.state.notes}
-    delete notes[this.state.currentNote.id]
+    delete notes[this.state.currentNote.id] // = null
     this.setState({ notes })
     this.resetCurrentNote()
   }
