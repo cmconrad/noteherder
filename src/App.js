@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import base from './base'
 
 import './App.css'
 import Main from './Main'
@@ -47,10 +48,11 @@ class App extends Component {
     })
   }
 
-  deleteNote = () => {
+  deleteCurrentNote = () => {
     const notes = {...this.state.notes}
     delete notes[this.state.currentNote.id]
     this.setState({ notes })
+    this.resetCurrentNote()
   }
 
   render() {
@@ -58,7 +60,7 @@ class App extends Component {
       setCurrentNote: this.setCurrentNote,
       resetCurrentNote: this.resetCurrentNote,
       saveNote: this.saveNote,
-      deleteNote: this.deleteNote,
+      deleteCurrentNote: this.deleteCurrentNote,
     }
     const noteData = {
       notes: this.state.notes,

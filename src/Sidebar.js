@@ -6,11 +6,6 @@ import newHover from './new-hover.png'
 import newIcon from './new.png'
 
 const Sidebar = ({resetCurrentNote}) =>{
-    
-    const handleNew = () => {
-        resetCurrentNote()
-        console.log("new clicked")
-  }
 
     return( 
         <nav className="Sidebar">
