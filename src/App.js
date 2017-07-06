@@ -8,20 +8,17 @@ class App extends Component {
   
   constructor(){
     super()
-  }
- 
-  }
-
+  
     this.state = {
       notes:{},
       currentNote:this.blankNote(),
     }
-    
+  }
     componentDidMount = () => {
       base.syncState(
         'notes',
         {
-          conext: this,
+          context: this,
           state: 'notes',
         }
       )
