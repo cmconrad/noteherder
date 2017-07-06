@@ -6,12 +6,18 @@ import newHover from './new-hover.png'
 import newIcon from './new.png'
 
 const Sidebar = () =>{
+    
+    const handleNew = (ev) => {
+        ev.preventDevault()
+        console.log("new clicked")
+  }
+
     return( 
         <nav className="Sidebar">
           <div className="logo">
               <img src={quill} alt="Noteherder"/>
           </div>
-          <a className="new-note" href="/notes">
+          <a className="new-note" href="/notes"  onClick={handleNew}>
             <img src={newHover} alt="New note"/>
             <img className="outline" src={newIcon} alt="New note"/>
           </a>

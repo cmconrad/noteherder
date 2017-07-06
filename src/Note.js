@@ -2,7 +2,7 @@ import React from 'react'
 
 const Note = (props) => {
     const handleClick = () => {
-        console.log("clicky clicky")
+        props.setCurrentNote(props.note)
     }
 
     return (

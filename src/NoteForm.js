@@ -15,9 +15,17 @@ class NoteForm extends Component{
           </div>
           <form>
             <p>
-              <input type="text" name="title" placeholder="Title your note"/>
+              <input
+                type="text" 
+                name="title" 
+                placeholder="Title your note"
+                value={this.props.currentNote.title}
+              />
             </p>
-            <textarea name="body"></textarea>
+            <textarea 
+              name="body"
+              value={this.props.currentNote.body}
+            ></textarea>
             <button type="submit" onClick={handleClick}>Submit</button>
           </form>
         </div>
