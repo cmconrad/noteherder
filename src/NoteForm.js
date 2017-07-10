@@ -8,6 +8,14 @@ class NoteForm extends Component{
     editorValue : RichTextEditor.createEmptyValue()
   }
 
+  componentWillReceiveProps = ({ currentNote }) => {
+    if (this.props.currentNote.body !== currentNote.body) {
+      const editorValue = RichTextEditor.createValueFromString(currentNote.body,'html')
+      this.setState({ editorValue })
+    }
+
+  }
+
   handleChanges = (ev) => {
     const note = {...this.props.currentNote}
     note[ev.target.name] = ev.target.value
