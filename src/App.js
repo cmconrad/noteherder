@@ -16,7 +16,9 @@ class App extends Component {
       uid: null,
     }
   }
+
     componentWillMount = () => {
+      this.getUserFromLocalStorage()
       auth.onAuthStateChanged(
         (user) => {
           if (user){
@@ -29,9 +31,15 @@ class App extends Component {
       )
     }
 
+    getUserFromLocalStorage = () => {
+      const uid = localStorage.getItem('uid')
+      if (!uid) return
+      this.setState({ uid })
+    }
+
     syncNotes = () => {
       this.bindingRef = base.syncState(
-        `${this.state.uid}/notes`,
+        `notes/${this.state.uid}`,
         {
           context: this,
           state: 'notes',
@@ -80,10 +88,12 @@ class App extends Component {
   }
 
   handleAuth = (user) => {
+    localStorage.setItem('uid', user.uid)
     this.setState({ uid: user.uid }, this.syncNotes )
   }
 
   handleUnauth = () => {
+    localStorage.removeItem('uid')
     if (this.bindingRef){
      base.removeBinding(this.bindingRef)
     }
