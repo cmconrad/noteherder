@@ -16,6 +16,7 @@ class App extends Component {
       uid: null,
     }
   }
+  
     componentDidMount = () => {
       base.syncState(
         'notes',
@@ -94,7 +95,6 @@ class App extends Component {
   }
 
   render() {
-    
     return (
       <div className="App">
         {this.signedIn() ? this.renderMain() : <SignIn handleAuth={this.handleAuth} />}

@@ -8,7 +8,8 @@ class NoteForm extends Component{
     const note = {...this.props.currentNote}
     note[ev.target.name] = ev.target.value
     this.props.saveNote(note)
-    }
+  }
+  
   render(){
 
     return(

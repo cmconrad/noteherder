@@ -6,8 +6,6 @@ import Note from './Note'
 const NoteList = (props) =>{
 
 const noteIds = Object.keys(props.notes)
-
-
     return (
         <div className="NoteList">
           <h3>Notes</h3>
