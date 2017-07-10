@@ -1,22 +1,29 @@
 import React from 'react'
 
-const Note = (props) => {
-    const handleClick = () => {
-        props.setCurrentNote(props.note)
-    }
+const Note = ({ note, setCurrentNoteId }) => {
+  const handleClick = () => {
+    setCurrentNoteId(note.id)
+  }
 
-    return (
-         <a className="active" onClick={handleClick}>
-            <li>
-            <div className="note">
-                <div className="note-title">{props.note.title}</div>
-                <div className="note-body">
-                <p>{props.note.body}</p>
-                </div>
-            </div>
-            </li>
-        </a>
-    )
+  return (
+    <a
+      className="active"
+      onClick={handleClick}
+    >
+      <li>
+        <div className="note">
+          <div className="note-title">
+            {note.title}
+          </div>
+          <div
+            className="note-body"
+            dangerouslySetInnerHTML={{ __html: note.body }}
+          >
+          </div>
+        </div>
+      </li>
+    </a>
+  )
 }
 
 export default Note

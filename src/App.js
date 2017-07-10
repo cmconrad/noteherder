@@ -6,79 +6,70 @@ import Main from './Main'
 import SignIn from './SignIn'
 
 class App extends Component {
-  
-  constructor(){
+  constructor() {
     super()
-  
+
     this.state = {
-      notes:{},
-      currentNote:this.blankNote(),
+      notes: {},
+      currentNoteId: null,
       uid: null,
     }
   }
 
-    componentWillMount = () => {
-      this.getUserFromLocalStorage()
-      auth.onAuthStateChanged(
-        (user) => {
-          if (user){
-            this.handleAuth(user)
-
-          } else {
-            this.handleUnauth()
-          }
+  componentWillMount = () => {
+    this.getUserFromLocalStorage()
+    auth.onAuthStateChanged(
+      (user) => {
+        if (user) {
+          // signed in
+          this.handleAuth(user)
+        } else {
+          // signed out
+          this.handleUnauth()
         }
-      )
-    }
-
-    getUserFromLocalStorage = () => {
-      const uid = localStorage.getItem('uid')
-      if (!uid) return
-      this.setState({ uid })
-    }
-
-    syncNotes = () => {
-      this.bindingRef = base.syncState(
-        `notes/${this.state.uid}`,
-        {
-          context: this,
-          state: 'notes',
-        }
-      )
-    }
-    
-
-  setCurrentNote = (note) => {
-    this.setState({ currentNote: note })
+      }
+    )
   }
 
-  blankNote = () => {
-    return {
-      id: null,
-      title:'',
-      body:'',
-    }
+  getUserFromLocalStorage = () => {
+    const uid = localStorage.getItem('uid')
+    if (!uid) return
+    this.setState({ uid })
+  }
+
+  syncNotes = () => {
+    this.bindingRef = base.syncState(
+      `notes/${this.state.uid}`,
+      {
+        context: this,  // what object the state is on
+        state: 'notes', // which property to sync
+      }
+    )
+  }
+
+  setCurrentNoteId = (noteId) => {
+    this.setState({ currentNoteId: noteId })
   }
 
   resetCurrentNote = () => {
-    this.setCurrentNote(this.blankNote())
+    this.setCurrentNoteId(null)
   }
 
   saveNote = (note) => {
-    
     const notes = {...this.state.notes}
     if (!note.id) {
-      note.id = `note-${Date.now()}`
+      note.id = Date.now()
     }
     notes[note.id] = note
 
     this.setState({ notes })
-    this.setCurrentNote(note)
+    this.setCurrentNoteId(note.id)
   }
 
-  deleteCurrentNote = () => {
+  removeNote = (note) => {
     const notes = {...this.state.notes}
-    notes[this.state.currentNote.id] = null
+    notes[note.id] = null
+
     this.setState({ notes })
     this.resetCurrentNote()
   }
@@ -89,51 +80,58 @@ class App extends Component {
 
   handleAuth = (user) => {
     localStorage.setItem('uid', user.uid)
-    this.setState({ uid: user.uid }, this.syncNotes )
+    this.setState(
+      { uid: user.uid },
+      this.syncNotes
+    )
   }
 
   handleUnauth = () => {
     localStorage.removeItem('uid')
-    if (this.bindingRef){
-     base.removeBinding(this.bindingRef)
+    if (this.bindingRef) {
+      base.removeBinding(this.bindingRef)
     }
-    
-    this.setState({ uid: null,
-    currentNote: this.blankNote(),
-    notes: {} })
 
+    this.setState({
+      uid: null,
+      notes: {},
+      currentNoteId: null,
+    })
   }
 
   signOut = () => {
     auth.signOut()
   }
 
-  renderMain = () => {
+  renderMain() {
     const actions = {
-      setCurrentNote: this.setCurrentNote,
+      setCurrentNoteId: this.setCurrentNoteId,
       resetCurrentNote: this.resetCurrentNote,
       saveNote: this.saveNote,
-      deleteCurrentNote: this.deleteCurrentNote,
-      signOut : this.signOut
+      removeNote: this.removeNote,
+      signOut: this.signOut,
     }
+
     const noteData = {
       notes: this.state.notes,
-      currentNote: this.state.currentNote
+      currentNoteId: this.state.currentNoteId,
     }
-    return( <Main 
+
+    return (
+      <Main
         {...actions}
         {...noteData}
-        />
+      />
     )
   }
 
   render() {
     return (
       <div className="App">
-        {this.signedIn() ? this.renderMain() : <SignIn />}
+        { this.signedIn() ? this.renderMain() : <SignIn /> }
       </div>
     );
   }
 }
 
-export default App;
+export default App

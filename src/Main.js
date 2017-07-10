@@ -6,24 +6,24 @@ import NoteList from './NoteList'
 import NoteForm from './NoteForm'
 
 const Main = (props) => {
-    return (
-        <div className="Main">
-            <Sidebar 
-                resetCurrentNote={props.resetCurrentNote}
-                signOut={props.signOut}
-            />
-            <NoteList 
-                notes={props.notes}
-                setCurrentNote={props.setCurrentNote}
-            />
-            <NoteForm 
-                currentNote={props.currentNote}
-                saveNote={props.saveNote}
-                deleteCurrentNote={props.deleteCurrentNote}
-            />
-                
-        </div>
-    )
+  return (
+    <div className="Main">
+      <Sidebar
+        resetCurrentNote={props.resetCurrentNote}
+        signOut={props.signOut}
+      />
+      <NoteList
+        notes={props.notes}
+        setCurrentNoteId={props.setCurrentNoteId}
+      />
+      <NoteForm
+        notes={props.notes}
+        currentNoteId={props.currentNoteId}
+        saveNote={props.saveNote}
+        removeNote={props.removeNote}
+      />
+    </div>
+  )
 }
 
-export default Main;
+export default Main
