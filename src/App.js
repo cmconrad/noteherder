@@ -20,26 +20,25 @@ class App extends Component {
       auth.onAuthStateChanged(
         (user) => {
           if (user){
-            //signed in
             this.handleAuth(user)
 
           } else {
-            //signed out
-            this.setState({ uid: null })
+            this.handleUnauth()
           }
         }
       )
     }
 
-    componentDidMount = () => {
-      base.syncNotes(
-        'notes',
+    syncNotes = () => {
+      this.bindingRef = base.syncState(
+        `${this.state.uid}/notes`,
         {
           context: this,
           state: 'notes',
         }
       )
     }
+    
 
   setCurrentNote = (note) => {
     this.setState({ currentNote: note })
@@ -58,16 +57,15 @@ class App extends Component {
   }
 
   saveNote = (note) => {
+    
     const notes = {...this.state.notes}
     if (!note.id) {
       note.id = `note-${Date.now()}`
     }
     notes[note.id] = note
 
-    this.setState({ 
-      notes,
-      currentNote: note,
-    })
+    this.setState({ notes })
+    this.setCurrentNote(note)
   }
 
   deleteCurrentNote = () => {
@@ -83,6 +81,17 @@ class App extends Component {
 
   handleAuth = (user) => {
     this.setState({ uid: user.uid }, this.syncNotes )
+  }
+
+  handleUnauth = () => {
+    if (this.bindingRef){
+     base.removeBinding(this.bindingRef)
+    }
+    
+    this.setState({ uid: null,
+    currentNote: this.blankNote(),
+    notes: {} })
+
   }
 
   signOut = () => {
