@@ -3,6 +3,7 @@ import base from './base'
 
 import './App.css'
 import Main from './Main'
+import SignIn from './SignIn'
 
 class App extends Component {
   
@@ -12,6 +13,7 @@ class App extends Component {
     this.state = {
       notes:{},
       currentNote:this.blankNote(),
+      uid: null,
     }
   }
     componentDidMount = () => {
@@ -60,23 +62,42 @@ class App extends Component {
     this.resetCurrentNote()
   }
 
-  render() {
+  signedIn = () => {
+    return this.state.uid
+  }
+
+  handleAuth = () => {
+    this.setState({ uid: 'cconrad' })
+  }
+
+  signOut = () => {
+    this.setState({ uid: null })
+  }
+
+  renderMain = () => {
     const actions = {
       setCurrentNote: this.setCurrentNote,
       resetCurrentNote: this.resetCurrentNote,
       saveNote: this.saveNote,
       deleteCurrentNote: this.deleteCurrentNote,
+      signOut : this.signOut
     }
     const noteData = {
       notes: this.state.notes,
       currentNote: this.state.currentNote
     }
-    return (
-      <div className="App">
-      <Main 
+    return( <Main 
         {...actions}
         {...noteData}
         />
+    )
+  }
+
+  render() {
+    
+    return (
+      <div className="App">
+        {this.signedIn() ? this.renderMain() : <SignIn handleAuth={this.handleAuth} />}
       </div>
     );
   }
