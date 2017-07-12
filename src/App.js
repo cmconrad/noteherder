@@ -117,7 +117,7 @@ class App extends Component {
         <Switch>
           <Route path="/sign-in" render={() => (
             this.signedIn()
-              ? <Redirect to="/sign-in"/>
+              ? <Redirect to="/notes"/>
               : <SignIn />
           )}/>
           <Route path="/notes" render={() => (
