@@ -14,8 +14,7 @@ const Note = ({ note }) => {
           <div
             className="note-body"
             dangerouslySetInnerHTML={{ __html: note.body }}
-          >
-          </div>
+          ></div>
         </div>
       </li>
     </NavLink>
