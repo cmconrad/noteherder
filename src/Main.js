@@ -21,7 +21,6 @@ const Main = (props) => {
         <Route path="/notes/:id" render={(navProps) =>  (     
           <NoteForm
             notes={props.notes}
-            currentNoteId={props.currentNoteId}
             saveNote={props.saveNote}
             removeNote={props.removeNote}
             {...navProps}
@@ -30,7 +29,6 @@ const Main = (props) => {
          <Route render={(navProps) => (
            <NoteForm
             notes={props.notes}
-            currentNoteId={props.currentNoteId}
             saveNote={props.saveNote}
             removeNote={props.removeNote}
             {...navProps}
