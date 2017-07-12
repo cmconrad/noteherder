@@ -15,7 +15,6 @@ const Main = (props) => {
       />
       <NoteList
         notes={props.notes}
-        setCurrentNoteId={props.setCurrentNoteId}
       />
 
 
