@@ -13,6 +13,7 @@ class App extends Component {
     this.state = {
       notes: {},
       uid: null,
+      firebaseNotesSynced: false,
     }
   }
 
@@ -43,6 +44,7 @@ class App extends Component {
       {
         context: this,  // what object the state is on
         state: 'notes', // which property to sync
+        then: () => this.setState({ firebaseNotesSynced: true })
       }
     )
   }
@@ -104,16 +106,14 @@ class App extends Component {
       saveNote: this.saveNote,
       removeNote: this.removeNote,
       signOut: this.signOut,
-    }
 
-    const noteData = {
-      notes: this.state.notes,
     }
 
     return (
       <Main
         {...actions}
-        {...noteData}
+         notes={this.state.notes}
+        firebaseNotesSynced={this.state.firebaseNotesSynced}
       />
     )
   }

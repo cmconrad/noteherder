@@ -23,6 +23,7 @@ const Main = (props) => {
             notes={props.notes}
             saveNote={props.saveNote}
             removeNote={props.removeNote}
+            firebaseSyncedNotes={props.firebaseSyncedNotes}
             {...navProps}
           />
         )}/>
@@ -31,6 +32,7 @@ const Main = (props) => {
             notes={props.notes}
             saveNote={props.saveNote}
             removeNote={props.removeNote}
+            firebaseSyncedNotes={props.firebaseSyncedNotes}
             {...navProps}
           />
            )}/>
