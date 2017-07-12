@@ -76,7 +76,7 @@ class NoteForm extends Component {
             <input
               type="text"
               name="title"
-              placeholder="Title your note"
+              placeholder="Title your note."
               value={this.state.note.title}
               onChange={this.handleChanges}
             />
@@ -86,6 +86,7 @@ class NoteForm extends Component {
             name="body"
             value={this.state.editorValue}
             onChange={this.handleEditorChanges}
+            placeholder="Just start typing."
           ></RichTextEditor>
         </form>
       </div>
