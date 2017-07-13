@@ -50,13 +50,17 @@ class App extends Component {
   }
 
   saveNote = (note) => {
+    const timestamp = Date.now()
     let shouldRedirect = false
     const notes = {...this.state.notes}
     if (!note.id) {
-      note.id = Date.now()
+      note.id = timestamp
       shouldRedirect = true
     }
+
+    note.updatedAt = timestamp
     notes[note.id] = note
+
     if (shouldRedirect){
       this.props.history.push(`/notes/${note.id}`)
       shouldRedirect = false
