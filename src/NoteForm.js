@@ -34,10 +34,20 @@ class NoteForm extends Component {
       id: null,
       title: '',
       body: '',
+      time: ''
     }
   }
 
+  updatedAt = () => {
+    const note = {...this.state.note}
+    let d = new Date()
+    note.time = d.toString()
+    this.setState({note}, () => console.log(this.state))
+    // console.log(note)
+  }
+
   handleChanges = (ev) => {
+    this.updatedAt()
     const note = {...this.state.note}
     note[ev.target.name] = ev.target.value
 
@@ -48,6 +58,7 @@ class NoteForm extends Component {
   }
 
   handleEditorChanges = (editorValue) => {
+    this.updatedAt()
     const note = {...this.state.note}
     note.body = editorValue.toString('html')
     this.setState(
